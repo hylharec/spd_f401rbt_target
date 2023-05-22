@@ -130,6 +130,31 @@ void FLASH_write(uint8_t verbose) {
       send_answer("Error: undefined flash op context\r\n", 34);
   }
   else {
+    // Erase corresponding sector before writing (Warning: Only checks sector of starting address)
+    int sector = 0
+    if (flash_op_context.addr > SECTOR_7) {
+      sector = 7;
+    }
+    else if (flash_op_context.addr > SECTOR_6) {
+      sector = 6;
+    }
+    else if (flash_op_context.addr > SECTOR_5) {
+      sector = 5;
+    }
+    else if (flash_op_context.addr > SECTOR_4) {
+      sector = 4;
+    }
+    else if (flash_op_context.addr > SECTOR_3) {
+      sector = 3;
+    }
+    else if (flash_op_context.addr > SECTOR_2) {
+      sector = 2;
+    }
+    else if (flash_op_context.addr > SECTOR_1) {
+      sector = 1;
+    }
+    FPEC_SectorErase(sector);
+
     FPEC_Program(flash_op_context.addr, (uint32_t) flash_op_context.data, flash_op_context.do_trig, flash_op_context.span);
 
     flash_op_context.configured = 0; // clear context

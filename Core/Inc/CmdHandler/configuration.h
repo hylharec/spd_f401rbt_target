@@ -24,10 +24,6 @@
  *        - TRIG_OUT_PWM: timer output channel 2 (trigger output signal when in continuous mode)
  */
 // =============================================================================================
-// Uncomment the following #define to use UART instead of SPI in code
-// (Warning: Peripheral still needs to be configured manually in MX GUI)
-#define USE_UART
-// =============================================================================================
 // Assembler trigger output control
 // The 2 MOV instructions need to be changed to point to the right GPIO port and pin
 
@@ -46,6 +42,16 @@ __asm("MOV r2, #0x80");       /* Move "set pin 7" mask in register 2 */\
 __asm("LSL r2, #16");         /* Transform SET mask into RESET mask (c.f. BSRR register) */\
 __asm("STR r2, [r3, #0x18]"); /* Apply mask on GPIO BSRR register */\
 })
+// =============================================================================================
+// Address to sector number
+#define SECTOR_0 0x08000000
+#define SECTOR_1 0x08004000
+#define SECTOR_2 0x08008000
+#define SECTOR_3 0x0800C000
+#define SECTOR_4 0x08010000
+#define SECTOR_5 0x08020000
+#define SECTOR_6 0x08040000
+#define SECTOR_7 0x08060000
 // =============================================================================================
 // The following structures and defines are related to the Flash interface registers of the
 // target STM32. They might differ from one to the other.
