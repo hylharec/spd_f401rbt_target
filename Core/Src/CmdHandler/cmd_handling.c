@@ -36,11 +36,7 @@ void Init_Cmd_Handling(TIM_HandleTypeDef *p_timer, UART_HandleTypeDef *p_uart, D
 }
 
 void Start_Cmd_Reception(void) {
-#ifdef USE_UART
   HAL_UART_Receive_DMA(uart, Rx_data, RX_LEN);
-#else
-  HAL_SPI_Receive_DMA(spi, Rx_data, RX_LEN);
-#endif
 }
 
 /* This callback is called by the HAL_UART_IRQHandler when the given number of bytes are received */

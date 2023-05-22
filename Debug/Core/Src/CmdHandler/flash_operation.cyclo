@@ -1,5 +1,0 @@
-flash_operation.c:35:6:FLASH_continuous_start	5
-flash_operation.c:82:6:FLASH_oneshot	5
-flash_operation.c:127:6:FLASH_write	4
-flash_operation.c:141:6:FLASH_read	7
-flash_operation.c:179:6:FLASH_erase	3

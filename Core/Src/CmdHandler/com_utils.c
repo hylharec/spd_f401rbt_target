@@ -9,16 +9,11 @@
 #include <com_utils.h>
 
 void send_answer(const char* msg, size_t len) {
-#ifdef USE_UART
   //while(HAL_DMA_GetState(&hdma_usart2_tx) != HAL_DMA_STATE_READY) ;
   while(HAL_UART_GetState(uart) != HAL_UART_STATE_READY) ;
   // Actually does not use DMA TX request as of now because of
   // errors when chaining DMA UART TX requests.
   HAL_UART_Transmit(uart, (const uint8_t *) msg, len, HAL_MAX_DELAY);
-#else
-  while(HAL_SPI_GetState(spi) != HAL_SPI_STATE_READY) ;
-  HAL_SPI_Transmit(spi, (uint8_t *) msg, len, HAL_MAX_DELAY);
-#endif
 }
 
 void split_cmds(void)

@@ -9,25 +9,25 @@
 
 struct FLASH_op_context flash_op_context = {0, 0, 0, 0, 0, 0, 0};
 
-const uint32_t SECTORS_ADDR_START[8] = {
-  0x08000000,
-  0x08004000,
-  0x08008000,
-  0x0800C000,
-  0x08010000,
-  0x08020000,
-  0x08040000,
-  0x08060000
+const uint32_t *SECTORS_ADDR_START[8] = {
+  (uint32_t*) 0x08000000,
+  (uint32_t*) 0x08004000,
+  (uint32_t*) 0x08008000,
+  (uint32_t*) 0x0800C000,
+  (uint32_t*) 0x08010000,
+  (uint32_t*) 0x08020000,
+  (uint32_t*) 0x08040000,
+  (uint32_t*) 0x08060000
 };
-const uint32_t SECTORS_ADDR_END[8] = {
-  0x08003FFF,
-  0x08007FFF,
-  0x0800BFFF,
-  0x0800FFFF,
-  0x0801FFFF,
-  0x0803FFFF,
-  0x0805FFFF,
-  0x0807FFFF
+const uint32_t *SECTORS_ADDR_END[8] = {
+  (uint32_t*) 0x08003FFF,
+  (uint32_t*) 0x08007FFF,
+  (uint32_t*) 0x0800BFFF,
+  (uint32_t*) 0x0800FFFF,
+  (uint32_t*) 0x0801FFFF,
+  (uint32_t*) 0x0803FFFF,
+  (uint32_t*) 0x0805FFFF,
+  (uint32_t*) 0x0807FFFF
 };
 
 
@@ -131,26 +131,26 @@ void FLASH_write(uint8_t verbose) {
   }
   else {
     // Erase corresponding sector before writing (Warning: Only checks sector of starting address)
-    int sector = 0
-    if (flash_op_context.addr > SECTOR_7) {
+    int sector = 0;
+    if (flash_op_context.addr > SECTORS_ADDR_START[7]) {
       sector = 7;
     }
-    else if (flash_op_context.addr > SECTOR_6) {
+    else if (flash_op_context.addr > SECTORS_ADDR_START[6]) {
       sector = 6;
     }
-    else if (flash_op_context.addr > SECTOR_5) {
+    else if (flash_op_context.addr > SECTORS_ADDR_START[5]) {
       sector = 5;
     }
-    else if (flash_op_context.addr > SECTOR_4) {
+    else if (flash_op_context.addr > SECTORS_ADDR_START[4]) {
       sector = 4;
     }
-    else if (flash_op_context.addr > SECTOR_3) {
+    else if (flash_op_context.addr > SECTORS_ADDR_START[3]) {
       sector = 3;
     }
-    else if (flash_op_context.addr > SECTOR_2) {
+    else if (flash_op_context.addr > SECTORS_ADDR_START[2]) {
       sector = 2;
     }
-    else if (flash_op_context.addr > SECTOR_1) {
+    else if (flash_op_context.addr > SECTORS_ADDR_START[1]) {
       sector = 1;
     }
     FPEC_SectorErase(sector);
